@@ -1,4 +1,4 @@
-@extends('layout')
+@extends('layout2')
 
 @section('title','To do list')
 
