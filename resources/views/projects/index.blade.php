@@ -12,11 +12,15 @@
     <tr>
         <td>Title</td>
         <td>Description</td>
+        <td colspan="2">Further action</td>
+        
     </tr>
     @foreach($projects as $project)
     <tr>
         <td>{{ $project->title}}</td>
         <td>{{ $project->description}}</td>
+        <td><button><a href="/projects/{{$project->id}}">View</button></td>
+        <td><button><a href="/projects/{{$project->id}}/edit">Further Action</button></td>
     </tr>
     @endforeach
 </table>    

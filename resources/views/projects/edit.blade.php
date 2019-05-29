@@ -11,11 +11,11 @@
 		<table>
 			<tr>
 				<td>Title :</td>
-				<td><input type="text" name="ftitle" value="{{ $project->title }}"></td>
+				<td><input type="text" name="title" value="{{ $project->title }}"></td>
 			</tr>
 			<tr>
 				<td>Description :</td>
-				<td><textarea name="fdesc">{{ $project->description }}</textarea></td>
+				<td><textarea name="description">{{ $project->description }}</textarea></td>
 			</tr>
 			<tr>
 				<td><button type="submit">Update Project</button></td>

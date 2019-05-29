@@ -17,9 +17,10 @@ class ProjectsController extends Controller
         return view('projects.index', compact('projects'));
     }
 
-    public function show()
+    public function show(Project $project)
     {
-    	$project = new Project;
+    	
+    	return view('projects.show', compact('project'));
 
     }
 
@@ -31,44 +32,59 @@ class ProjectsController extends Controller
 
     public function store()
     {
-    	$project = new Project;
-    	$project->title =request('ftitle');
-    	$project->description = request('fdesc');
+    	
+    	Project::create(request()->validate([
+    	    		'title' => ['required','min:3', 'max:255'],
+    	    		'description' => ['required','min:3','max:255']
+    	    	]));
 
-	    $project->save();
+
+    	
+    	//Project::create(request(['title','description']));
+
+
+    	// Project::create([
+    	// 	'title' => request('title'),
+    	// 	'description' =>request('description')
+    	// ]);
+
+    	// $project = new Project;
+    	// $project->title =request('title');
+    	// $project->description = request('description');
+	    // $project->save();
 
 	    return redirect('/projects');
     }
 
-    public function edit($id)
+    public function edit(Project $project)
     {
-    	$project = Project::findorfail($id);
+    	//$project = Project::findorfail($id);
     	return view('projects.edit', compact('project'));
     }
 
-    public function update($id)
+    public function update(Project $project)
     {
-    	$project = new Project;
+    	
 
-    	$title = request('ftitle');
-    	$desc = request('fdesc');
+    	$title = request('title');
+    	$desc = request('description');
 
-    	$projectID = Project::find($id);
+    	//$project = Project::find($id);
 
-    	$projectID->title = $title;
-    	$projectID->description = $desc;
-    	$projectID->save();
+    	$project->title = $title;
+    	$project->description = $desc;
+    	$project->save();
 
     	return redirect('/projects');
 
 
     }
 
-    public function destroy($id)
+    public function destroy(Project $project)
     {
-    	$projectID = Project::find($id);
+    	//$project = Project::find($id);
 
-    	$projectID->delete(); 
+    	$project->delete(); 
 
     	return redirect('/projects');
     }
