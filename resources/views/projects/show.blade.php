@@ -26,11 +26,21 @@
 
 @endif
 <br>
-			
 	<form method="POST" action="/projects/{{$project->id}}/tasks">
+		@csrf
+			<h1> New Task </h1>
+			<input type="text" name="description">
+
+		<div class="control">
+		  <button class="button is-primary">Add Task</button>
+		</div>
+		@include ('errors')
+	</form>
+	<!-- <form method="POST" action="/projects/{{$project->id}}/tasks">
 		@csrf
 		<h1> New Task</h1>
 		<input type="text" name="description">
 		<button>Add Task</button>
-	</form>
+	</form> -->
 @endsection
+
