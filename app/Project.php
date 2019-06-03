@@ -1,7 +1,8 @@
 <?php
 
 namespace App;
-
+use App\Mail\ProjectCreated;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Database\Eloquent\Model;
 
 class Project extends Model
@@ -10,6 +11,7 @@ class Project extends Model
     // 	'title','description'
     // ];
     protected $guarded =[];
+
 
     public function tasks()
     {
@@ -26,6 +28,10 @@ class Project extends Model
     	$this->tasks()->create($task);
     }
 
+    public function owner()
+    {
+       return $this->belongsTo(User::class);
+    }    
 
 
 

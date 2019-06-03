@@ -11,7 +11,22 @@
 |
 */
 
-Route::get('/', 'PagesController@index');
+use App\Notifications\SubscriptionRenewalFailed;
+use Illuminate\Filesystem\Filesystem;
+use App\Services\Twitter;
+
+// app()->bind('twitter',function(){
+// 	return new App\Twitter('jdjdjd');
+// });
+
+Route::get('/', function(){
+	
+	$user = App\User::first();
+	$user->notify(new SubscriptionRenewalFailed);
+
+	return 'Done';
+});
+//Route::get('/', 'PagesController@index');
 Route::get('/todo', 'PagesController@list');
 Route::get('/projects', 'ProjectsController@index');
 Route::get('/projects/create','ProjectsController@create');
@@ -44,3 +59,6 @@ Route::post('/projects/{project}/tasks','ProjectTasksController@store');
     
 //     //return view('todo')->withTasks($tasks);
 // });
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
